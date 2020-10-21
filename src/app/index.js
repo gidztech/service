@@ -45,6 +45,7 @@ const bundlewatchAsync = async ({
     repoName,
     repoBranch,
     baseBranchName,
+    githubUri = 'https://api.github.com',
     githubAccessToken,
     commitSha,
     currentBranchFileDetails,
@@ -54,6 +55,7 @@ const bundlewatchAsync = async ({
         repoOwner,
         repoName,
         commitSha,
+        githubUri,
         githubAccessToken,
     })
 

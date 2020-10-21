@@ -6,13 +6,20 @@ const protectedMiddleware = asyncMiddleware(async (req, res, next) => {
         return next()
     }
 
-    const { commitSha, repoName, repoOwner, githubAccessToken } = req.body
+    const {
+        commitSha,
+        repoName,
+        repoOwner,
+        githubUri,
+        githubAccessToken,
+    } = req.body
 
     const hasAccess = await canTokenAccessRepo({
         repoOwner,
         repoName,
         commitSha,
         githubAccessToken,
+        githubUri,
     })
     if (!hasAccess) {
         return res.status(401).json({ error: `Not allowed` })

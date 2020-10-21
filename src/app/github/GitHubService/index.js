@@ -21,10 +21,17 @@ const getContextForFilePath = (filePath) => {
 }
 
 class GitHubService {
-    constructor({ repoOwner, repoName, commitSha, githubAccessToken }) {
+    constructor({
+        repoOwner,
+        repoName,
+        commitSha,
+        githubUri,
+        githubAccessToken,
+    }) {
         this.repoOwner = repoOwner
         this.repoName = repoName
         this.commitSha = commitSha
+        this.githubUri = githubUri
         this.githubAccessToken = githubAccessToken
         this.contexts = new Set()
     }
@@ -59,7 +66,7 @@ class GitHubService {
         try {
             return axios({
                 method: 'POST',
-                url: `https://api.github.com/repos/${this.repo}/statuses/${this.commitSha}`,
+                url: `${this.githubUri}/repos/${this.repo}/statuses/${this.commitSha}`,
                 responseType: 'json',
                 data: {
                     state: status,
@@ -90,7 +97,7 @@ class GitHubService {
         try {
             return axios({
                 method: 'POST',
-                url: `https://api.github.com/repos/${this.repo}/issues/26/comments`,
+                url: `${this.githubUri}/repos/${this.repo}/issues/26/comments`,
                 responseType: 'json',
                 data: {
                     body,

@@ -6,6 +6,7 @@ const canTokenAccessRepo = ({
     repoOwner,
     repoName,
     commitSha,
+    githubUri = 'https://api.github.com',
     githubAccessToken,
 }) => {
     // TODO: clean this up
@@ -26,7 +27,7 @@ const canTokenAccessRepo = ({
         return Promise.resolve(false)
     }
 
-    const url = `https://api.github.com/repos/${repoOwner}/${repoName}/statuses/${commitSha}`
+    const url = `${githubUri}/repos/${repoOwner}/${repoName}/statuses/${commitSha}`
     return axios({
         method: 'GET',
         url,
